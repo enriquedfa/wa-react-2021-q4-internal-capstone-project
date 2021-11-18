@@ -38,7 +38,7 @@
 }
 
 /* MY CSS */
-@import url("./components/Header/Header.css");
-@import url("./components/Footer/Footer.css");
-@import url("./components/Categories/Categories.css");
-@import url("./components/Featured/Featured.css");
+@import url("./components/Header/Header.styles.css");
+@import url("./components/Footer/Footer.styles.css");
+@import url("./components/Categories/Categories.styles.css");
+@import url("./components/Featured/Featured.styles.css");
