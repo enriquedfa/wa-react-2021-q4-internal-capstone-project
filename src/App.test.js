@@ -3,6 +3,12 @@ import App from './App';
 
 test('renders learn react link', () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  const header = screen.getByAltText("E Commerce");
+  expect(header).toBeInTheDocument();
+
+  const categories = screen.getByText("Categories");
+  expect(categories).toBeInTheDocument();
+
+  const featured = screen.getByText("Featured Products");
+  expect(featured).toBeInTheDocument();
 });

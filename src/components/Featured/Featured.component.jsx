@@ -1,7 +1,6 @@
 import React from "react";
-import featured from "./featured-products.json"
+import featured from "../../mocks/featured-products.json"
 
-// Returns a grid of featured products
 function Featured() {
     return (
         <div className="featured">
