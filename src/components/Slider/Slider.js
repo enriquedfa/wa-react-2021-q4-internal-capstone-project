@@ -4,6 +4,8 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 
 function Slider() {
+  const { results } = sliders
+
   return (
     <Carousel
       showThumbs={true}
@@ -12,7 +14,7 @@ function Slider() {
       autoPlay={true}
       interval={3000}
     >
-      {sliders.results.map((slider) => {
+      {results.map((slider) => {
         return (
           <div key={slider.id}>
             <img

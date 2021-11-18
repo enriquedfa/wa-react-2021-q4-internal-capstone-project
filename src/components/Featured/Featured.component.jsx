@@ -2,11 +2,12 @@ import React from "react";
 import featured from "../../mocks/featured-products.json"
 
 function Featured() {
+    const { results } = featured
     return (
         <div className="featured">
             <h2>Featured Products</h2>
             <div className="featured-products">
-                {featured.results.map(product => (
+                {results.map(product => (
                     <div className="featured-product" key={product.id}>
                         <img className="featured-product-image" src={product.data.mainimage.url} alt={product.data.mainimage.alt} />
                         <div className="featured-product-info">

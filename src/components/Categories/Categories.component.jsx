@@ -18,16 +18,4 @@ function Categories() {
     );
 }
 
-//             {categories.results.map((category, index) => {
-//                 return (
-//                     <div className="category" key={index}>
-//                         <img src={category.data.main_image.url} alt={category.data.main_image.alt}/>
-//                         <p>{category.data.name}</p>
-//                     </div>
-//                 )
-//             })}
-//         </div>
-//     )
-// }
-
 export default Categories;
