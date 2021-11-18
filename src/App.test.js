@@ -11,4 +11,7 @@ test('renders learn react link', () => {
 
   const featured = screen.getByText("Featured Products");
   expect(featured).toBeInTheDocument();
+
+  const footer = screen.getByText("Ecommerce created during Wizeline’s Academy React Bootcamp");
+  expect(footer).toBeInTheDocument();
 });
