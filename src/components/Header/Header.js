@@ -1,13 +1,13 @@
 import React from "react";
+import logo from "./logo.png";
 import { MdShoppingCart, MdSearch } from "react-icons/md"
 
 function Header() {
     return (
         <header className="header">
             <div className="header__logo">
-                E Commerce
                 <a href="/">
-                    {/* <img src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-suite-everything-you-need-know-about-google-newest-0.png" alt="E Commerce" /> */}
+                    <img src={logo} alt="E Commerce" />
                 </a>
             </div>
             <div className="header__search">
@@ -21,15 +21,6 @@ function Header() {
                     <a href="/">
                         <span>Hello, Sign in</span>
                     </a>
-                    {/* <a href="/">
-                        <span>Returns</span>
-                    </a>
-                    <a href="/">
-                        <span>Orders</span>
-                    </a>
-                    <a href="/">
-                        <span>Prime</span>
-                    </a> */}
                 </div>
                 <div className="header__nav--right">
                     <a href="/">

@@ -1,7 +1,7 @@
 import React from "react";
-import Categories from "./Categories";
-import Featured from "./Featured";
-import Slider from "./Slider";
+import Categories from "../Categories/Categories.component";
+import Featured from "../Featured/Featured.component";
+import Slider from "../Slider/Slider";
 function Homepage() {
     return (
         <div className="homepage">
