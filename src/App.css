@@ -38,7 +38,22 @@
 }
 
 /* MY CSS */
+.btn-view-all {
+  background-color: #f1f1f1;
+  border: none;
+  color: #000;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
 @import url("./components/Header/Header.styles.css");
 @import url("./components/Footer/Footer.styles.css");
 @import url("./components/Categories/Categories.styles.css");
-@import url("./components/Featured/Featured.styles.css");
+@import url("./components/Products/Products.styles.css");
+@import url("./components/ProductsPage/ProductsPage.styles.css");
+@import url("./components/Sidebar/Sidebar.styles.css");

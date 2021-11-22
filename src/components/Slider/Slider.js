@@ -8,7 +8,7 @@ function Slider() {
 
   return (
     <Carousel
-      showThumbs={true}
+      showThumbs={false}
       showStatus={false}
       showIndicators={true}
       autoPlay={true}
