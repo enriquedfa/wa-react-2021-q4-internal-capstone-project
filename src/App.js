@@ -11,15 +11,17 @@ function App() {
   return (
     <div className="App">
       <Header setIsHomepage={setIsHomepage} />
-      {isHomepage ? <Homepage /> : null}
-      {isHomepage ? (
-        <button
-          className="btn-view-all"
-          onClick={() => setIsHomepage(!isHomepage)}
-        >
-          View All Products
-        </button>
-      ) : null}
+      {isHomepage && (
+        <>
+          <Homepage />
+          <button
+            className="btn-view-all"
+            onClick={() => setIsHomepage(!isHomepage)}
+          >
+            View All Products
+          </button>
+        </>
+      )}
       {!isHomepage ? <ProductsPage /> : null}
       <Footer />
     </div>

@@ -1,19 +1,19 @@
 import { React } from "react";
 
-export default function Sidebar(params) {
-  const { results } = params.data;
+export default function Sidebar({ data, categories, setCategories }) {
+  const { results } = data;
 
   function eventHandler(e) {
     e.preventDefault();
     const targetCategories = e.target.attributes.slug.value.split("_");
-    
+
     if (e.target.classList.contains("selected")) {
-      const newCategories = params.categories.filter((category) => {
+      const newCategories = categories.filter((category) => {
         return !targetCategories.includes(category);
       });
-      params.setCategories(newCategories);
+      setCategories(newCategories);
     } else {
-      params.setCategories([...params.categories, ...targetCategories]);
+      setCategories([...categories, ...targetCategories]);
     }
   }
 
@@ -28,8 +28,9 @@ export default function Sidebar(params) {
         <h3 className="sidebar__title">Categories</h3>
         <ul className="sidebar__list">
           {results.map((item) => {
-            const isSelected = hasCommonElement(params.categories, item.slugs);
-            const className = isSelected ? "selected" : "";
+            const className = hasCommonElement(categories, item.slugs)
+              ? "selected"
+              : "";
             return (
               <li
                 onClick={eventHandler}
