@@ -1,25 +1,27 @@
 import { React } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Sidebar({ data, categories, setCategories }) {
-  const { results } = data;
+  const { results: availableCategories } = data;
+  const navigate = useNavigate();
 
   function eventHandler(e) {
     e.preventDefault();
-    const targetCategories = e.target.attributes.slug.value.split("_");
+    const targetCategory = e.target.attributes.id.value;
 
     if (e.target.classList.contains("selected")) {
       const newCategories = categories.filter((category) => {
-        return !targetCategories.includes(category);
+        return category !== targetCategory;
       });
       setCategories(newCategories);
     } else {
-      setCategories([...categories, ...targetCategories]);
+      setCategories([...categories, targetCategory]);
     }
   }
 
-  // Checks if two arrays have a common element
-  function hasCommonElement(arr1, arr2) {
-    return arr1.some((element) => arr2.includes(element));
+  function clearAll() {
+    navigate("/products");
+    setCategories([]);
   }
 
   return (
@@ -27,21 +29,24 @@ export default function Sidebar({ data, categories, setCategories }) {
       <div className="sidebar__categories">
         <h3 className="sidebar__title">Categories</h3>
         <ul className="sidebar__list">
-          {results.map((item) => {
-            const className = hasCommonElement(categories, item.slugs)
-              ? "selected"
-              : "";
+          {availableCategories.map((item) => {
+            const className = categories.includes(item.id) ? "selected" : "";
             return (
               <li
                 onClick={eventHandler}
                 className={`sidebar__item ${className}`}
                 key={item.id}
-                slug={item.slugs.join("_")}
+                id={item.id}
               >
                 {item.data.name}
               </li>
             );
           })}
+          {categories.length > 0 && (
+            <li className="sidebar__item" onClick={clearAll}>
+              Clear All
+            </li>
+          )}
         </ul>
       </div>
     </div>

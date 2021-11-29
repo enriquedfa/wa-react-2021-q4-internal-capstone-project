@@ -57,3 +57,5 @@
 @import url("./components/Products/Products.styles.css");
 @import url("./components/ProductsPage/ProductsPage.styles.css");
 @import url("./components/Sidebar/Sidebar.styles.css");
+@import url("./components/ProductDetail/ProductDetail.styles.css");
+@import url("./components/SearchResults/SearchResults.styles.css");
