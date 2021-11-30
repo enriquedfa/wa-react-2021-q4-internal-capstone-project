@@ -2,7 +2,7 @@ import { React, useState, useEffect } from "react";
 import Product from "../Product/Product.component";
 import ReactPaginate from "react-paginate";
 
-function Products({ header, data, categories, withDescription, itemsPerPage }) {
+function Products({ header, data, categories, withDescription, itemsPerPage=20 }) {
   const { results: products } = data;
   const prodCategories = categories || [];
   const [currentItems, setCurrentItems] = useState(null);
