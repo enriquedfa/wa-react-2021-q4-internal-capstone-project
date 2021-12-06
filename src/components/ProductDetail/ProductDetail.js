@@ -13,8 +13,6 @@ function ProductDetail() {
   const { data: product, isLoading } = useSingleProduct(productId);
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
-  console.log("data", product);
-  console.log("isLoading", isLoading);
   return (
     <div className="product-detail">
       {isLoading ? (

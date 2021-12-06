@@ -8,7 +8,7 @@ import { useFeaturedProducts } from "../../utils/hooks/useFeaturedProducts";
 function Homepage() {
   const { data: featuredProducts, isLoading: featuredProductsIsLoading } =
     useFeaturedProducts();
-  console.log("featuredProducts", featuredProducts);
+
   return (
     <div className="homepage">
       <Slider />

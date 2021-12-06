@@ -6,7 +6,6 @@ function SearchResults() {
 
   const { data, isLoading } = useSearch(searchTerm);
 
-  console.log(data);
   return (
     <div className="search-results">
       {isLoading ? (
