@@ -16,7 +16,11 @@ function Homepage() {
       {featuredProductsIsLoading ? (
         <p>Loading...</p>
       ) : (
-        <Products data={featuredProducts} header="Featured Products" />
+        <Products
+          data={featuredProducts}
+          header="Featured Products"
+          categories={[]}
+        />
       )}
       <Link to="/Products" className="btn-view-all">
         View All Products
