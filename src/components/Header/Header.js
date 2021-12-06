@@ -1,7 +1,8 @@
 import React from "react";
 import logo from "./logo.png";
-import { MdShoppingCart, MdSearch } from "react-icons/md";
+import { MdShoppingCart } from "react-icons/md";
 import { Link } from "react-router-dom";
+import Search from "../Search/Search.component";
 
 function Header() {
   return (
@@ -11,19 +12,7 @@ function Header() {
           <img src={logo} alt="E Commerce" />
         </Link>
       </div>
-      <div className="header__search">
-        <form action={`/search`} method="GET">
-          <input
-            name="q"
-            id="searchTerm"
-            type="text"
-            placeholder="Search for products"
-          />
-          <button type="submit">
-            <MdSearch />
-          </button>
-        </form>
-      </div>
+      <Search route={"/search"} />
       <div className="header__nav">
         <div className="header__nav--left">
           <a href="/">
