@@ -13,7 +13,7 @@ function Categories() {
       ) : (
         <div className="categories-grid">
           {catList.results.map((category) => (
-            <Card {...category} />
+            <Card key={category.id} {...category} />
           ))}
         </div>
       )}
