@@ -5,8 +5,6 @@ import { useParams } from "react-router-dom";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation, Thumbs } from "swiper";
-import "swiper/swiper-bundle.min.css";
-import "swiper/swiper.min.css";
 // install Swiper modules
 SwiperCore.use([Navigation, Thumbs]);
 
