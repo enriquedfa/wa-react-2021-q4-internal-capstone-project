@@ -2,9 +2,6 @@ const CartReducer = (state = {}, action) => {
   switch (action.type) {
     case "ADD_TO_CART":
       // Check if the item is already in the cart
-      console.log(state.cart);
-      console.log(action.payload.id);
-      console.log(state.cart.find((item) => item.id === action.payload.id));
       if (state.cart.find((item) => item.id === action.payload.id)) {
         // If it is, increase the quantity
         const index = state.cart.findIndex(
@@ -27,6 +24,20 @@ const CartReducer = (state = {}, action) => {
       return {
         ...state,
         cart: state.cart.filter((item) => item.id !== action.payload),
+      };
+    case "UPDATE_CART":
+      return {
+        ...state,
+        cart: state.cart.map((item) => {
+          if (item.id === action.payload.id) {
+            return {
+              ...item,
+              quantity: action.payload.quantity,
+            };
+          } else {
+            return item;
+          }
+        }),
       };
     case "CLEAR_CART":
       return {
