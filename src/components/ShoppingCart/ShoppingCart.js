@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import CartContext from "../../state/CartContext";
 import CartItem from "../CartItem/CartItem";
 import { useCartProducts } from "../../utils/hooks/useCartProducts";
@@ -72,7 +73,9 @@ function ShoppingCart() {
         <div className="shopping-cart__footer__total">
           <h2>Total</h2>
           <p>$ {calculateTotal()}</p>
-          <button disabled={state.cart.length === 0}>Checkout</button>
+          <Link to="/checkout">
+            <button disabled={state.cart.length === 0}>Checkout</button>
+          </Link>
           <button onClick={() => dispatch({ type: "CLEAR_CART" })}>
             Clear Cart
           </button>

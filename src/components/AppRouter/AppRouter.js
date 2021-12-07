@@ -4,6 +4,7 @@ import ProductsPage from "../ProductsPage/ProductsPage";
 import ProductDetail from "../ProductDetail/ProductDetail";
 import SearchResults from "../SearchResults/SearchResults";
 import ShoppingCart from "../ShoppingCart/ShoppingCart";
+import Checkout from "../Checkout/Checkout";
 
 function AppRouter() {
   return (
@@ -14,6 +15,7 @@ function AppRouter() {
       <Route path="/Product/:productId" element={<ProductDetail />} />
       <Route path="/search" element={<SearchResults />} />
       <Route path="/cart" element={<ShoppingCart />} />
+      <Route path="/checkout" element={<Checkout />} />
     </Routes>
   );
 }
