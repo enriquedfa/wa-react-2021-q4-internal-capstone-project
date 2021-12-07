@@ -3,8 +3,22 @@ import logo from "./logo.png";
 import { MdShoppingCart } from "react-icons/md";
 import { Link } from "react-router-dom";
 import Search from "../Search/Search.component";
+import CartContext from "../../state/CartContext";
 
 function Header() {
+  const { state } = React.useContext(CartContext);
+
+  function totalCartItems() {
+    let total = 0;
+    // eslint-disable-next-line array-callback-return
+    state.cart.map((item) => {
+      total += item.quantity;
+    });
+    return total;
+  }
+
+  console.log(state);
+
   return (
     <header className="header">
       <div className="header__logo">
@@ -20,10 +34,11 @@ function Header() {
           </a>
         </div>
         <div className="header__nav--right">
-          <a href="/">
+          <Link to="/Cart">
             <span>Cart</span>
+            {` (${totalCartItems()}) `}
             <MdShoppingCart />
-          </a>
+          </Link>
         </div>
       </div>
     </header>

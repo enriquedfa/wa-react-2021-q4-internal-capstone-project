@@ -96,6 +96,10 @@
   font-size: 12px;
 }
 
+.product-detail-add-to-cart-button[disabled] {
+  background-color: #ccc;
+}
+
 .product-detail-specifications {
   padding-top: 25px;
   justify-content: flex-start;

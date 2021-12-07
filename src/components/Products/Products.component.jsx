@@ -52,9 +52,7 @@ function Products({
                 withDescription={withDescription}
                 shortDescription={product.data.short_description}
                 key={product.id}
-                productId={product.id}
-                {...product.data.mainimage}
-                {...product.data}
+                product={product}
               />
             ))}
           </div>
