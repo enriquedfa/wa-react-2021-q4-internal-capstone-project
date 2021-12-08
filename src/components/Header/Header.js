@@ -17,8 +17,6 @@ function Header() {
     return total;
   }
 
-  console.log(state);
-
   return (
     <header className="header">
       <div className="header__logo">

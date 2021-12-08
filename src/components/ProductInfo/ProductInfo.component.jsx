@@ -5,9 +5,7 @@ function ProductInfo(props) {
   const { state, dispatch } = useContext(CartContext);
   const [availableStock, setAvailableStock] = useState([1]);
   const [selectedQuantity, setSelectedQuantity] = useState(1);
-  // console.log(props);
-  console.log("Selected Qty", selectedQuantity);
-  console.log("Available Qty", availableStock.length);
+
   function handleSelect(e) {
     setSelectedQuantity(parseInt(e.target.value));
   }
