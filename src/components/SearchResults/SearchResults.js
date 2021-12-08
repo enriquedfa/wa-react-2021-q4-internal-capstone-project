@@ -16,6 +16,7 @@ function SearchResults() {
           header="Search Results"
           withDescription
           itemsPerPage={20}
+          categories={[]}
         />
       )}
     </div>
