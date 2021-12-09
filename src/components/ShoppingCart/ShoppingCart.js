@@ -9,12 +9,21 @@ function ShoppingCart() {
   const { data: cartProducts, isLoading: cartProductsLoading } =
     useCartProducts(state.cart.map((item) => item.id));
 
-  function onChangeQuantity(id, quantity) {
+  console.log(state.totalItems);
+  console.log(state.total);
+
+  function handleRemove() {
+    dispatch({ type: "CLEAR_CART" });
+  }
+
+  function onChangeQuantity(id, quantity, oldQuantity, price) {
     dispatch({
       type: "UPDATE_CART",
       payload: {
         id,
         quantity,
+        oldQuantity,
+        price,
       },
     });
   }
@@ -26,13 +35,6 @@ function ShoppingCart() {
   function getStock(product) {
     return cartProducts.results?.find((item) => item.id === product.id).data
       .stock;
-  }
-
-  function calculateTotal() {
-    return state.cart.reduce(
-      (acc, item) => acc + item.price * item.quantity,
-      0
-    );
   }
 
   return (
@@ -72,13 +74,11 @@ function ShoppingCart() {
       <div className="shopping-cart__footer">
         <div className="shopping-cart__footer__total">
           <h2>Total</h2>
-          <p>$ {calculateTotal()}</p>
+          <p>$ {state.total}</p>
           <Link to="/checkout">
             <button disabled={state.cart.length === 0}>Checkout</button>
           </Link>
-          <button onClick={() => dispatch({ type: "CLEAR_CART" })}>
-            Clear Cart
-          </button>
+          <button onClick={handleRemove}>Clear Cart</button>
         </div>
       </div>
     </div>

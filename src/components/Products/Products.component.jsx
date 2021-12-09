@@ -16,13 +16,13 @@ function Products({
   const [itemOffset, setItemOffset] = useState(0);
 
   useEffect(() => {
-    const aux = products.filter((item) => {
+    const filteredItems = products.filter((item) => {
       return (
         categories.length === 0 || categories.includes(item.data.category.id)
       );
     });
-    setPageCount(Math.ceil(aux.length / itemsPerPage));
-    setFilteredProducts(aux);
+    setPageCount(Math.ceil(filteredItems.length / itemsPerPage));
+    setFilteredProducts(filteredItems);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categories]);
 

@@ -1,22 +1,29 @@
 import { Link } from "react-router-dom";
 import CartContext from "../../state/CartContext";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 
 function Product({ withDescription, shortDescription, product }) {
   const { state, dispatch } = useContext(CartContext);
+  const [cartQty, setCartQty] = useState(0);
 
-  function checkCartQty() {
-    let cart = state.cart;
-    let cartQty = 0;
-    if (cart) {
-      cart.forEach((cartItem) => {
-        if (cartItem.id === product.id) {
-          cartQty = parseInt(cartItem.quantity);
-        }
-      });
-      return cartQty;
-    }
-  }
+  const handleOnclick = () => {
+    dispatch({
+      type: "ADD_TO_CART",
+      payload: {
+        id: product.id,
+        name: product.data.name,
+        image: product.data.mainimage.url,
+        price: product.data.price,
+        quantity: 1,
+      },
+    });
+  };
+
+  useEffect(() => {
+    const productQty = state.cart.filter((item) => item.id === product.id)[0]
+      ?.quantity;
+    setCartQty(productQty);
+  }, [state.cart, product.id]);
 
   return (
     <div className="product" key={product.id}>
@@ -35,27 +42,16 @@ function Product({ withDescription, shortDescription, product }) {
         )}
         <p className="product-price">${product.data.price}</p>
         <div className="product-buttons">
-          {checkCartQty() >= product.data.stock ? (
-            <button className="product-button" disabled>
+          {cartQty >= product.data.stock ? (
+            <button
+              className="product-button"
+              disabled
+              style={{ cursor: "auto" }}
+            >
               Out of stock
             </button>
           ) : (
-            <button
-              onClick={() =>
-                dispatch({
-                  type: "ADD_TO_CART",
-                  payload: {
-                    id: product.id,
-                    name: product.data.name,
-                    image: product.data.mainimage.url,
-                    price: product.data.price,
-                    quantity: 1,
-                  },
-                })
-              }
-            >
-              Add to Cart
-            </button>
+            <button onClick={handleOnclick}>Add to Cart</button>
           )}
           <Link to={`/product/${product.id}`}>
             <button>View</button>

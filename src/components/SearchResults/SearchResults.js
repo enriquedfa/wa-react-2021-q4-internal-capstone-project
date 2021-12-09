@@ -3,7 +3,6 @@ import Products from "../Products/Products.component";
 
 function SearchResults() {
   const searchTerm = new URLSearchParams(window.location.search).get("q");
-
   const { data, isLoading } = useSearch(searchTerm);
 
   return (

@@ -1,9 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdDelete } from "react-icons/md";
 
 function CartItem({ item, stock, onRemoveItem, onChangeQuantity }) {
   const [quantity, setQuantity] = useState(item.quantity);
+  const [oldQuantity, setOldQuantity] = useState(item.quantity);
   const availableStock = Array.from({ length: stock }, (v, k) => k + 1);
+
+  useEffect(() => {
+    if (oldQuantity !== quantity) {
+      setOldQuantity(quantity);
+    }
+  }, [setOldQuantity, oldQuantity, quantity]);
 
   return (
     <div className="cart-item">
@@ -18,13 +25,18 @@ function CartItem({ item, stock, onRemoveItem, onChangeQuantity }) {
         </div>
         <div className="cart-item-quantity">
           <div className="cart-item-quantity-value">
-            Quantity:{" "}
+            Quantity:
             <select
               id="quantity"
               className="product-detail-quantity"
               onChange={(e) => {
+                onChangeQuantity(
+                  item.id,
+                  parseInt(e.target.value),
+                  oldQuantity,
+                  item.price
+                );
                 setQuantity(e.target.value);
-                onChangeQuantity(item.id, parseInt(e.target.value));
               }}
               value={quantity}
             >

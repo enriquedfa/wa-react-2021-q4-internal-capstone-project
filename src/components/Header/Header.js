@@ -8,15 +8,6 @@ import CartContext from "../../state/CartContext";
 function Header() {
   const { state } = React.useContext(CartContext);
 
-  function totalCartItems() {
-    let total = 0;
-    // eslint-disable-next-line array-callback-return
-    state.cart.map((item) => {
-      total += item.quantity;
-    });
-    return total;
-  }
-
   return (
     <header className="header">
       <div className="header__logo">
@@ -34,7 +25,7 @@ function Header() {
         <div className="header__nav--right">
           <Link to="/Cart">
             <span>Cart</span>
-            {` (${totalCartItems()}) `}
+            {` (${state.totalItems}) `}
             <MdShoppingCart />
           </Link>
         </div>

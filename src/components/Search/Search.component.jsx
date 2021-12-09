@@ -1,12 +1,21 @@
+import { useNavigate } from "react-router";
 import { MdSearch } from "react-icons/md";
 
 function Search({ route }) {
+  const navigate = useNavigate();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const search = e.target.search.value;
+    navigate(`${route}?q=${search}`, { replace: true });
+  }
+
   return (
     <div className="header__search">
-      <form action={route} method="GET">
+      <form onSubmit={handleSubmit}>
         <input
-          name="q"
-          id="searchTerm"
+          name="search"
+          id="search"
           type="text"
           placeholder="Search for products"
         />
