@@ -9,9 +9,6 @@ function ShoppingCart() {
   const { data: cartProducts, isLoading: cartProductsLoading } =
     useCartProducts(state.cart.map((item) => item.id));
 
-  console.log(state.totalItems);
-  console.log(state.total);
-
   function handleRemove() {
     dispatch({ type: "CLEAR_CART" });
   }

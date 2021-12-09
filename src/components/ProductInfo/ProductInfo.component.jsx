@@ -8,11 +8,6 @@ function ProductInfo(product) {
   const [availableStock, setAvailableStock] = useState([1]);
   const [selectedQuantity, setSelectedQuantity] = useState(1);
 
-  console.log(cartQty);
-  console.log(hasStock);
-  console.log(selectedQuantity);
-  console.log(availableStock);
-
   function handleSelect(e) {
     setSelectedQuantity(Number(e.target.value));
   }
