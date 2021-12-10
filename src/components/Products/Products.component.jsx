@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { React } from "react";
 import Product from "../Product/Product.component";
 import ReactPaginate from "react-paginate";
 
