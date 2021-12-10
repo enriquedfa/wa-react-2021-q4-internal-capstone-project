@@ -18,9 +18,6 @@ function ProductsPage() {
     setPage(newPage + 1);
   }
 
-  console.log("categories", categories);
-  console.log("products", products);
-
   const urlCategory = new URLSearchParams(window.location.search).get(
     "category"
   );

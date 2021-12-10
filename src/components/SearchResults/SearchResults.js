@@ -9,8 +9,6 @@ function SearchResults() {
   const [page, setPage] = useState(1);
   const { searchResults, loading } = useAxiosSearch(search, page);
 
-  console.log(searchTerm);
-
   useEffect(() => {
     setPage(1);
     setSearch(searchTerm);
