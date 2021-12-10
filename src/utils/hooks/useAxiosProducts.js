@@ -3,9 +3,9 @@ import { useState, useEffect } from "react";
 import { API_BASE_URL } from "../constants";
 import { useLatestAPI } from "./useLatestAPI";
 
-export function useAxiosCategories(query = "", page = 1) {
+export function useAxiosProducts(categories, pageSize, page) {
   const { ref: apiRef, isLoading: isApiMetadataLoading } = useLatestAPI();
-  const [categories, setCategories] = useState([]);
+  const [products, setProducts] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -18,14 +18,20 @@ export function useAxiosCategories(query = "", page = 1) {
     setError(false);
     let cancel;
 
+    // YWHy0xIAACoAykKm is light
+    // YWHyYRIAACgAykCq is decorate
+
     axios({
       method: "GET",
       url: `${API_BASE_URL}/documents/search`,
       params: {
         ref: "YZaBvBIAACgAvnOP",
-        q: '[[at(document.type,"category")]]',
+        q: `[[at(document.type, "product")][any(my.product.category, ${JSON.stringify(
+          categories
+        )})]]`,
         lang: "en-us",
-        pageSize: 10,
+        pageSize: pageSize,
+        page: page,
       },
       cancelToken: new axios.CancelToken((c) => {
         // eslint-disable-next-line no-unused-vars
@@ -33,7 +39,7 @@ export function useAxiosCategories(query = "", page = 1) {
       }),
     })
       .then((response) => {
-        setCategories(response.data);
+        setProducts(response.data);
         setLoading(false);
       })
       .catch((e) => {
@@ -41,7 +47,8 @@ export function useAxiosCategories(query = "", page = 1) {
         setError(true);
         setLoading(false);
       });
-  }, [query, page, apiRef, isApiMetadataLoading]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [apiRef, isApiMetadataLoading, page, pageSize, categories]);
 
-  return { categories, loading, error };
+  return { products, loading, error };
 }

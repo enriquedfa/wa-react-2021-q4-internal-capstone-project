@@ -20,7 +20,7 @@ export default function Sidebar({ data, categories, setCategories }) {
   }
 
   function clearAll() {
-    navigate("/products");
+    navigate("/Products");
     setCategories([]);
   }
 

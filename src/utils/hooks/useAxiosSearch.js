@@ -3,9 +3,9 @@ import { useState, useEffect } from "react";
 import { API_BASE_URL } from "../constants";
 import { useLatestAPI } from "./useLatestAPI";
 
-export function useAxiosCategories(query = "", page = 1) {
+export function useAxiosSearch(query = "", page = 1) {
   const { ref: apiRef, isLoading: isApiMetadataLoading } = useLatestAPI();
-  const [categories, setCategories] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -23,9 +23,9 @@ export function useAxiosCategories(query = "", page = 1) {
       url: `${API_BASE_URL}/documents/search`,
       params: {
         ref: "YZaBvBIAACgAvnOP",
-        q: '[[at(document.type,"category")]]',
+        q: `[[at(document.type, "product")][fulltext(document, "${query}")]]`,
         lang: "en-us",
-        pageSize: 10,
+        pageSize: 20,
       },
       cancelToken: new axios.CancelToken((c) => {
         // eslint-disable-next-line no-unused-vars
@@ -33,7 +33,7 @@ export function useAxiosCategories(query = "", page = 1) {
       }),
     })
       .then((response) => {
-        setCategories(response.data);
+        setSearchResults(response.data);
         setLoading(false);
       })
       .catch((e) => {
@@ -43,5 +43,5 @@ export function useAxiosCategories(query = "", page = 1) {
       });
   }, [query, page, apiRef, isApiMetadataLoading]);
 
-  return { categories, loading, error };
+  return { searchResults, loading, error };
 }

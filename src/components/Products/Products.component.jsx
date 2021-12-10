@@ -5,49 +5,19 @@ import ReactPaginate from "react-paginate";
 function Products({
   header,
   data,
-  categories = [],
   withDescription,
   itemsPerPage = 20,
+  onPageChange,
 }) {
   const { results: products } = data;
-  const [filteredProducts, setFilteredProducts] = useState([]);
-  const [currentItems, setCurrentItems] = useState(null);
-  const [pageCount, setPageCount] = useState(0);
-  const [itemOffset, setItemOffset] = useState(0);
-
-  useEffect(() => {
-    const filteredItems = products.filter((item) => {
-      return (
-        categories.length === 0 || categories.includes(item.data.category.id)
-      );
-    });
-    setPageCount(Math.ceil(filteredItems.length / itemsPerPage));
-    setFilteredProducts(filteredItems);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [categories]);
-
-  useEffect(() => {
-    const endOffset = itemOffset + itemsPerPage;
-    setCurrentItems(filteredProducts.slice(itemOffset, endOffset));
-    setPageCount(Math.ceil(filteredProducts.length / itemsPerPage));
-  }, [itemOffset, itemsPerPage, filteredProducts]);
-
-  const handlePageClick = (event) => {
-    const newOffset = (event.selected * itemsPerPage) % products.length;
-    setItemOffset(newOffset);
-  };
 
   return (
     <div className="products-container">
-      {currentItems && (
+      {products && (
         <>
-          {currentItems.length > 0 ? (
-            <h2>{header}</h2>
-          ) : (
-            <h2>No products found</h2>
-          )}
+          {products.length > 0 ? <h2>{header}</h2> : <h2>No products found</h2>}
           <div className="products">
-            {currentItems.map((product) => (
+            {products.map((product) => (
               <Product
                 withDescription={withDescription}
                 shortDescription={product.data.short_description}
@@ -58,12 +28,13 @@ function Products({
           </div>
         </>
       )}
-      {products.length > itemsPerPage && (
+      {data.total_pages > 1 && (
         <div className="products-pagination">
           <ReactPaginate
-            pageCount={pageCount}
+            forcePage={data.page - 1}
+            pageCount={data.total_pages}
             itemsPerPage={itemsPerPage}
-            onPageChange={handlePageClick}
+            onPageChange={(event) => onPageChange(event.selected)}
             pageRangeDisplayed={5}
             previousLabel="<"
             nextLabel=">"
