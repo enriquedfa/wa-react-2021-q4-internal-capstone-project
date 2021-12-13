@@ -1,9 +1,13 @@
 import React from "react";
 import logo from "./logo.png";
-import { MdShoppingCart, MdSearch } from "react-icons/md";
+import { MdShoppingCart } from "react-icons/md";
 import { Link } from "react-router-dom";
+import Search from "../Search/Search.component";
+import CartContext from "../../state/CartContext";
 
 function Header() {
+  const { state } = React.useContext(CartContext);
+
   return (
     <header className="header">
       <div className="header__logo">
@@ -11,19 +15,7 @@ function Header() {
           <img src={logo} alt="E Commerce" />
         </Link>
       </div>
-      <div className="header__search">
-        <form action={`/search`} method="GET">
-          <input
-            name="q"
-            id="searchTerm"
-            type="text"
-            placeholder="Search for products"
-          />
-          <button type="submit">
-            <MdSearch />
-          </button>
-        </form>
-      </div>
+      <Search route={"/search"} />
       <div className="header__nav">
         <div className="header__nav--left">
           <a href="/">
@@ -31,10 +23,11 @@ function Header() {
           </a>
         </div>
         <div className="header__nav--right">
-          <a href="/">
+          <Link to="/Cart">
             <span>Cart</span>
+            {` (${state.totalItems}) `}
             <MdShoppingCart />
-          </a>
+          </Link>
         </div>
       </div>
     </header>

@@ -96,6 +96,10 @@
   font-size: 12px;
 }
 
+.product-detail-add-to-cart-button[disabled] {
+  background-color: #ccc;
+}
+
 .product-detail-specifications {
   padding-top: 25px;
   justify-content: flex-start;
@@ -140,3 +144,7 @@
   height: 100%;
   object-fit: cover;
 }
+
+/* Import Swipper Styles */
+@import url("../../../node_modules/swiper/swiper.min.css");
+@import url("../../../node_modules/swiper/swiper-bundle.min.css");

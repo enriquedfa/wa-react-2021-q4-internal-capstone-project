@@ -1,34 +1,43 @@
 import { React, useState, useEffect } from "react";
 import Sidebar from "../Sidebar/Sidebar.component";
 import Products from "../Products/Products.component";
-import { useCategories } from "../../utils/hooks/useCategories";
-import { useProducts } from "../../utils/hooks/useProducts";
+import { useAxiosCategories } from "../../utils/hooks/useAxiosCategories";
+import { useAxiosProducts } from "../../utils/hooks/useAxiosProducts";
 
 function ProductsPage() {
-  const [categories, setCategories] = useState([]);
-  const { data: catList, isLoading: catIsLoading } = useCategories();
-  const { data: products, isLoading: productsIsLoading } = useProducts();
+  const [categoriesFilter, setCategoriesFilters] = useState([]);
+  const [page, setPage] = useState(1);
+  const { categories, loading: categoriesIsLoading } = useAxiosCategories();
+  const { products, loading: productsIsLoading } = useAxiosProducts(
+    categoriesFilter,
+    12,
+    page
+  );
+
+  function handlePageChange(newPage) {
+    setPage(newPage + 1);
+  }
 
   const urlCategory = new URLSearchParams(window.location.search).get(
     "category"
   );
 
   useEffect(() => {
-    if (!catIsLoading) {
-      if (catList.results.find((category) => category.id === urlCategory)) {
-        setCategories([...categories, urlCategory]);
+    if (!categoriesIsLoading) {
+      if (categories.results.find((category) => category.id === urlCategory)) {
+        setCategoriesFilters([...categoriesFilter, urlCategory]);
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [catIsLoading]);
+  }, [categoriesIsLoading]);
 
   return (
     <div className="products">
-      {!catIsLoading ? (
+      {!categoriesIsLoading ? (
         <Sidebar
-          data={catList}
-          categories={categories}
-          setCategories={setCategories}
+          data={categories}
+          categories={categoriesFilter}
+          setCategories={setCategoriesFilters}
         />
       ) : null}
       {!productsIsLoading ? (
@@ -36,8 +45,9 @@ function ProductsPage() {
           <Products
             header="Products"
             data={products}
-            categories={categories}
+            categories={categoriesFilter}
             itemsPerPage={12}
+            onPageChange={handlePageChange}
           />
         </>
       ) : null}

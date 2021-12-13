@@ -1,26 +1,28 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useReducer } from "react";
+import { BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import Homepage from "./components/Homepage/Homepage";
-import ProductsPage from "./components/ProductsPage/ProductsPage";
-import ProductDetail from "./components/ProductDetail/ProductDetail";
-import SearchResults from "./components/SearchResults/SearchResults";
+import AppRouter from "./components/AppRouter/AppRouter";
+import CartContext from "./state/CartContext";
+import CartReducer from "./state/CartReducer";
 
 function App() {
+  const [state, dispatch] = useReducer(CartReducer, {
+    cart: [],
+    total: 0,
+    totalItems: 0,
+  });
+
   return (
     <Router>
-      <div className="App">
-        <Header />
-        <Routes>
-          <Route path="/" element={<Homepage />} />
-          <Route path="/Home" element={<Homepage />} />
-          <Route path="/Products" element={<ProductsPage />} />
-          <Route path="/Product/:productId" element={<ProductDetail />} />
-          <Route path="/search" element={<SearchResults />} />
-        </Routes>
-        <Footer />
-      </div>
+      <CartContext.Provider value={{ state, dispatch }}>
+        <div className="App">
+          <Header />
+          <AppRouter />
+          <Footer />
+        </div>
+      </CartContext.Provider>
     </Router>
   );
 }
