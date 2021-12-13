@@ -12,6 +12,16 @@ function CartItem({ item, stock, onRemoveItem, onChangeQuantity }) {
     }
   }, [setOldQuantity, oldQuantity, quantity]);
 
+  function handleChangeQuantity(e) {
+    onChangeQuantity(
+      item.id,
+      parseInt(e.target.value),
+      oldQuantity,
+      item.price
+    );
+    setQuantity(e.target.value);
+  }
+
   return (
     <div className="cart-item">
       <div className="cart-item-image">
@@ -29,15 +39,7 @@ function CartItem({ item, stock, onRemoveItem, onChangeQuantity }) {
             <select
               id="quantity"
               className="product-detail-quantity"
-              onChange={(e) => {
-                onChangeQuantity(
-                  item.id,
-                  parseInt(e.target.value),
-                  oldQuantity,
-                  item.price
-                );
-                setQuantity(e.target.value);
-              }}
+              onChange={handleChangeQuantity}
               value={quantity}
             >
               {availableStock.map((item, index) => (

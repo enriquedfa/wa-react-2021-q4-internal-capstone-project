@@ -60,7 +60,6 @@ function ProductInfo(product) {
         ))}
       </div>
       <div className="product-detail-add-to-cart">
-        {}
         <select
           id="quantity"
           className="product-detail-quantity"
