@@ -5,7 +5,7 @@ function Search({ route }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    const search = e.target.search.value;
+    const search = e.target.elements[0].value;
     navigate(`${route}?q=${search}`, { replace: true });
   }
 
