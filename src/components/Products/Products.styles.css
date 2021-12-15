@@ -28,6 +28,10 @@ ul.pagination {
   cursor: pointer;
 }
 
+[role="button"][aria-disabled="true"] {
+  cursor: default;
+}
+
 .page-item.page-active .page-link {
   background-color: #888888;
   color: #fff;

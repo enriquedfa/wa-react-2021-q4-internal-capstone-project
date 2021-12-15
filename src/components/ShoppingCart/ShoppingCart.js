@@ -25,8 +25,15 @@ function ShoppingCart() {
     });
   }
 
-  function onRemoveItem(id) {
-    dispatch({ type: "REMOVE_FROM_CART", payload: id });
+  function onRemoveItem(id, price, quantity) {
+    dispatch({
+      type: "REMOVE_FROM_CART",
+      payload: {
+        id,
+        price,
+        quantity,
+      },
+    });
   }
 
   function getStock(product) {
@@ -61,7 +68,9 @@ function ShoppingCart() {
                 key={item.id}
                 item={item}
                 stock={getStock(item)}
-                onRemoveItem={onRemoveItem}
+                onRemoveItem={() =>
+                  onRemoveItem(item.id, item.price, item.quantity)
+                }
                 onChangeQuantity={onChangeQuantity}
               />
             ))}
@@ -71,7 +80,7 @@ function ShoppingCart() {
       <div className="shopping-cart__footer">
         <div className="shopping-cart__footer__total">
           <h2>Total</h2>
-          <p>$ {state.total}</p>
+          <p title="Cart Total">$ {state.total}</p>
           <Link to="/checkout">
             <button disabled={state.cart.length === 0}>Checkout</button>
           </Link>

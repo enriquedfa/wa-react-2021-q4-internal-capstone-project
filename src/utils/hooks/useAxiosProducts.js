@@ -16,10 +16,8 @@ export function useAxiosProducts(categories, pageSize, page) {
 
     setLoading(true);
     setError(false);
+    // eslint-disable-next-line no-unused-vars
     let cancel;
-
-    // YWHy0xIAACoAykKm is light
-    // YWHyYRIAACgAykCq is decorate
 
     axios({
       method: "GET",
@@ -34,7 +32,6 @@ export function useAxiosProducts(categories, pageSize, page) {
         page: page,
       },
       cancelToken: new axios.CancelToken((c) => {
-        // eslint-disable-next-line no-unused-vars
         cancel = c;
       }),
     })

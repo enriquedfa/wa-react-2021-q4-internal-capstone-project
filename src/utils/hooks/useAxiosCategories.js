@@ -16,6 +16,7 @@ export function useAxiosCategories(query = "", page = 1) {
 
     setLoading(true);
     setError(false);
+    // eslint-disable-next-line no-unused-vars
     let cancel;
 
     axios({
@@ -28,7 +29,6 @@ export function useAxiosCategories(query = "", page = 1) {
         pageSize: 10,
       },
       cancelToken: new axios.CancelToken((c) => {
-        // eslint-disable-next-line no-unused-vars
         cancel = c;
       }),
     })

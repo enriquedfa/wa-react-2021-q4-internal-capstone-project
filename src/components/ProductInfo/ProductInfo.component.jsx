@@ -60,7 +60,11 @@ function ProductInfo(product) {
         ))}
       </div>
       <div className="product-detail-add-to-cart">
+        <label className="product-detail-quantity" htmlFor="quantity">
+          Quantity:
+        </label>
         <select
+          name="quantity"
           id="quantity"
           className="product-detail-quantity"
           onChange={handleSelect}
@@ -73,6 +77,7 @@ function ProductInfo(product) {
           ))}
         </select>
         <button
+          name="add-to-cart"
           disabled={!hasStock}
           onClick={handleAddToCart}
           className="product-detail-add-to-cart-button"
