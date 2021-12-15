@@ -15,24 +15,18 @@ beforeEach(() => {
 
 describe("Homepage", () => {
   it("Banner Slide is fetching", async () => {
-    await waitFor(() => {
-      const slider = screen.getByText("GREAT VERSATILITY - DINING ROOM");
-      expect(slider).toBeInTheDocument();
-    });
+    const slider = await screen.findByText("GREAT VERSATILITY - DINING ROOM");
+    expect(slider).toBeInTheDocument();
   });
 
   it("Categories are fetching", async () => {
-    await waitFor(() => {
-      const categories = screen.getByText("Categories");
-      expect(categories).toBeInTheDocument();
-    });
+    const categories = await screen.findByText("Categories");
+    expect(categories).toBeInTheDocument();
   });
 
   it("Featured Products are fetched", async () => {
-    await waitFor(() => {
-      const featured = screen.getByText("Featured Products");
-      expect(featured).toBeInTheDocument();
-    });
+    const featured = await screen.findByText("Featured Products");
+    expect(featured).toBeInTheDocument();
   });
 });
 
@@ -41,35 +35,24 @@ describe("Product Page", () => {
     const btnViewAllProducts = await screen.findByText("View All Products");
     fireEvent.click(btnViewAllProducts);
 
-    await waitFor(async () => {
-      const allProducts = await screen.findByText("Products");
-      expect(allProducts).toBeInTheDocument();
-    });
+    const allProducts = await screen.findByText("Products");
+    expect(allProducts).toBeInTheDocument();
   });
 
   it("Categories are loading", async () => {
-    await waitFor(() => {
-      const categories = screen.getByText("Categories");
-      expect(categories).toBeInTheDocument();
-    });
+    const categories = await screen.findByText("Categories");
+    expect(categories).toBeInTheDocument();
   });
 
-  it("Bed & Bath category filter is working", async () => {
+  it("Bed & Bath category filter is working with 2 pages", async () => {
     const btnBedBathCategory = await screen.findByText("Bed & Bath");
     fireEvent.click(btnBedBathCategory);
 
-    await waitFor(async () => {
-      const item = await screen.findByText("Kleenera Silas");
-      expect(item).toBeInTheDocument();
-    });
-  });
+    const item = await screen.findByText("Kleenera Silas");
+    expect(item).toBeInTheDocument();
 
-  it("Pagination is visible and has two pages", async () => {
-    // TODO - Find a way to get all the pages and check if the number of pages is 2
-    await waitFor(() => {
-      const pagination = screen.getByText("2");
-      expect(pagination).toBeInTheDocument();
-    });
+    const pagination = await screen.findByText("2");
+    expect(pagination).toBeInTheDocument();
   });
 
   it("Pagination - Previous is disabled when user is on first page", async () => {
@@ -92,12 +75,13 @@ describe("Product Page", () => {
   });
 
   it("Pagination - Next button is disabled when user is on last page", async () => {
-    // TODO - It's not working, not sure why
+    const lastPage = await screen.findByText("8");
+    fireEvent.click(lastPage);
+
     const btnNext = await screen.findByText(">");
-    fireEvent.click(btnNext);
 
     await waitFor(() => {
-      expect(btnNext.closest("li")).toHaveClass("page-item");
+      expect(btnNext.closest("li")).toHaveClass("disabled");
     });
   });
 });
@@ -165,8 +149,7 @@ describe("Product Detail Page", () => {
   });
 });
 
-// TODO - It doesn't work, I don't know why
-xdescribe("Search Results Page", () => {
+describe("Search Results Page", () => {
   it("Search Results Page is loading", async () => {
     const searchInput = await screen.findByRole(/textbox/);
     userEvent.type(searchInput, "bed");
@@ -174,8 +157,10 @@ xdescribe("Search Results Page", () => {
     userEvent.click(searchButton);
 
     await waitFor(() => {
-      const searchResults = screen.getByRole("heading");
-      expect(searchResults).toHaveTextContent("Search Results");
+      const searchResults = screen.getByRole("heading", {
+        name: "Search Results",
+      });
+      expect(searchResults).toBeInTheDocument();
     });
   });
 
