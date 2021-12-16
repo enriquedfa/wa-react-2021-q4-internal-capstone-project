@@ -1,4 +1,5 @@
 import {
+  configure,
   render,
   screen,
   waitFor,
@@ -8,6 +9,12 @@ import {
 
 import userEvent from "@testing-library/user-event";
 import App from "./App";
+
+beforeAll(() => {
+  configure({
+    asyncUtilTimeout: 10000,
+  });
+});
 
 beforeEach(() => {
   render(<App />);
