@@ -41,6 +41,8 @@ function ShoppingCart() {
       .stock;
   }
 
+  const disableCheckout = state.cart.length === 0;
+
   return (
     <div className="shopping-cart">
       <div className="shopping-cart__header">
@@ -82,7 +84,7 @@ function ShoppingCart() {
           <h2>Total</h2>
           <p title="Cart Total">$ {state.total}</p>
           <Link to="/checkout">
-            <button disabled={state.cart.length === 0}>Checkout</button>
+            <button disabled={disableCheckout}>Checkout</button>
           </Link>
           <button onClick={handleRemove}>Clear Cart</button>
         </div>

@@ -22,6 +22,8 @@ function CartItem({ item, stock, onRemoveItem, onChangeQuantity }) {
     setQuantity(e.target.value);
   }
 
+  const itemTotal = item.price * quantity;
+
   return (
     <div className="cart-item">
       <div className="cart-item-image">
@@ -70,7 +72,7 @@ function CartItem({ item, stock, onRemoveItem, onChangeQuantity }) {
       </div>
       <div className="cart-item-total">
         <div className="cart-item-total-value" title="Item Subtotal">
-          Total: $ {item.price * item.quantity}
+          Total: $ {itemTotal}
         </div>
       </div>
     </div>
