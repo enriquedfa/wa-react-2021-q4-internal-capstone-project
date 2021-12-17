@@ -1,13 +1,5 @@
-import {
-  configure,
-  render,
-  screen,
-  waitFor,
-  fireEvent,
-  within,
-} from "@testing-library/react";
+import { configure, render, screen } from "@testing-library/react";
 
-import userEvent from "@testing-library/user-event";
 import App from "./App";
 
 beforeAll(() => {
