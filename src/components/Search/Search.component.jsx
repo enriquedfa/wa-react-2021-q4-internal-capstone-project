@@ -1,12 +1,11 @@
 import { useNavigate } from "react-router";
-import { MdSearch } from "react-icons/md";
 
 function Search({ route }) {
   const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
-    const search = e.target.search.value;
+    const search = e.target.elements[0].value;
     navigate(`${route}?q=${search}`, { replace: true });
   }
 
@@ -19,9 +18,7 @@ function Search({ route }) {
           type="text"
           placeholder="Search for products"
         />
-        <button type="submit">
-          <MdSearch />
-        </button>
+        <button type="submit">Search</button>
       </form>
     </div>
   );

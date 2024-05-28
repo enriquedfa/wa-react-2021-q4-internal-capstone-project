@@ -3,9 +3,9 @@ import { useState, useEffect } from "react";
 import { API_BASE_URL } from "../constants";
 import { useLatestAPI } from "./useLatestAPI";
 
-export function useAxiosSearch(query = "", page = 1) {
+export function useAxiosFeaturedProducts() {
   const { ref: apiRef, isLoading: isApiMetadataLoading } = useLatestAPI();
-  const [searchResults, setSearchResults] = useState([]);
+  const [featuredProducts, setFeaturedProducts] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -23,17 +23,17 @@ export function useAxiosSearch(query = "", page = 1) {
       method: "GET",
       url: `${API_BASE_URL}/documents/search`,
       params: {
-        ref: "YZaBvBIAACgAvnOP",
-        q: `[[at(document.type, "product")][fulltext(document, "${query}")]]`,
+        ref: apiRef,
+        q: `[[at(document.type, "product")][at(document.tags, ["Featured"])]]`,
         lang: "en-us",
-        pageSize: 20,
+        pageSize: 16,
       },
       cancelToken: new axios.CancelToken((c) => {
         cancel = c;
       }),
     })
       .then((response) => {
-        setSearchResults(response.data);
+        setFeaturedProducts(response.data);
         setLoading(false);
       })
       .catch((e) => {
@@ -41,7 +41,8 @@ export function useAxiosSearch(query = "", page = 1) {
         setError(true);
         setLoading(false);
       });
-  }, [query, page, apiRef, isApiMetadataLoading]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [apiRef, isApiMetadataLoading]);
 
-  return { searchResults, loading, error };
+  return { featuredProducts, loading, error };
 }

@@ -22,32 +22,42 @@ function CartItem({ item, stock, onRemoveItem, onChangeQuantity }) {
     setQuantity(e.target.value);
   }
 
+  const itemTotal = item.price * quantity;
+
   return (
     <div className="cart-item">
       <div className="cart-item-image">
         <img src={item.image} alt={item.name} />
       </div>
       <div className="cart-item-details">
-        <div className="cart-item-title">{item.name}</div>
-        <div className="cart-item-sku">{item.id}</div>
+        <div className="cart-item-title">
+          <h4>{item.name}</h4>
+        </div>
+        <div className="cart-item-sku" title="Item SKU">
+          {item.id}
+        </div>
         <div className="cart-item-price">
-          <div className="cart-item-price-value">$ {item.price}</div>
+          <div className="cart-item-price-value" title="Item Unit Price">
+            $ {item.price}
+          </div>
         </div>
         <div className="cart-item-quantity">
           <div className="cart-item-quantity-value">
-            Quantity:
-            <select
-              id="quantity"
-              className="product-detail-quantity"
-              onChange={handleChangeQuantity}
-              value={quantity}
-            >
-              {availableStock.map((item, index) => (
-                <option key={index} value={item}>
-                  {item}
-                </option>
-              ))}
-            </select>
+            <label>
+              Quantity:
+              <select
+                name="quantity"
+                className="product-detail-quantity"
+                onChange={handleChangeQuantity}
+                value={quantity}
+              >
+                {availableStock.map((item, index) => (
+                  <option key={index} value={item}>
+                    {item}
+                  </option>
+                ))}
+              </select>
+            </label>
           </div>
         </div>
         <div className="cart-item-remove">
@@ -61,8 +71,8 @@ function CartItem({ item, stock, onRemoveItem, onChangeQuantity }) {
         </div>
       </div>
       <div className="cart-item-total">
-        <div className="cart-item-total-value">
-          Total: $ {item.price * item.quantity}
+        <div className="cart-item-total-value" title="Item Subtotal">
+          Total: $ {itemTotal}
         </div>
       </div>
     </div>

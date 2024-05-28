@@ -11,7 +11,7 @@ function Header() {
   return (
     <header className="header">
       <div className="header__logo">
-        <Link to="/Home">
+        <Link to="/Home" aria-label="Home">
           <img src={logo} alt="E Commerce" />
         </Link>
       </div>
